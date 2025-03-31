@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.card {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    font-size: 15px;
+    height: 40px;
+}
+
+.card-text {
+    white-space:no-wrap;
+    margin-bottom: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-text span{
+    color: black;
+    font-weight: 500;
+}
+
+.card_price{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.col-lg-3 {
+    padding: 5px;
+}
+
+.addBtn {
+    font-weight: 500;
+    font-size: 16px;
+    width: 100%;
+    background-color: #e6e8ed;
+    margin-bottom: 30px;
+}
+
+.addBtn:hover {
+    background-color: #b6b6b6;
+}
+
+.categories{
+    padding: 0px;
+    list-style: none;
+    position: fixed;
+    top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+}
+
+.categories li{
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+}
+.categories li::after{
+    width: 100%;
+    height: 100%;
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.categories input{
+    width: 17px;
+}
+.categories span{
+    user-select: none;
+    font-weight: 500;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.categories::-webkit-scrollbar{
+    display: none;
+}
+.card{
+    position: relative;
+}
+
+.btn_cart{ 
+    width: 37px;
+    height: 37px;
+    background-color: white;
+    border: 1px solid rgba(54,55,65,.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px !important;
+    font-size: 18 px;
+    color: rgba(54,55,65,.2);
+    transition: 0.3s;
+}
+
+.btn_cart:hover{
+    background-color: rgba(54,55,65,.2); 
+    border: 1px solid rgba(54,55,65,.2);
+}
+.btn_card_active{
+    border-color: rgb(65, 65,203) !important;
+    color: white !important;
+    background-color: rgb(65,65,203) !important;
+}
+.navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.empty-search {
+    margin-top: 50px;
+  }
