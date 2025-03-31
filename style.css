@@ -124,3 +124,50 @@
 .empty-search {
     margin-top: 50px;
   }
+  
+  @media (max-width: 768px) {
+    .card-title {
+        font-size: 14px;
+        height: auto;
+    }
+
+    .card-text {
+        white-space: normal;
+    }
+
+    .card_price {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .col-lg-3 {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .addBtn {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    .categories {
+        position: static;
+        height: auto;
+        flex-direction: row;
+        overflow-x: auto;
+        white-space: nowrap;
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    .categories li {
+        padding: 5px;
+        font-size: 14px;
+    }
+
+    .btn_cart {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+}
