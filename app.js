@@ -116,6 +116,7 @@ const getData = () => {
 const getCartData = () => {
   console.log(cart);
   $(".cart_data").html(""); 
+  let totalPrice = 0;
 
   if (cart.length === 0) {
     $(".cart_data").html(`
@@ -124,20 +125,26 @@ const getCartData = () => {
         <p class="mt-3 text-muted">Your cart is empty</p>
       </div>
     `);
+    $("#totalPrice").text("0.00");  
     return;
   }
 
   cart.map((item) => {
+    let finalPrice = item.price;
     let str;
+
     if (item.discountPercentage != 0 && item.discountPercentage != null) {
+      finalPrice = (item.price - (item.price * item.discountPercentage) / 100).toFixed(2);
       str = `<p class="card-text"><del>$${item.price}</del>  
-             <span>${(item.price - (item.price * item.discountPercentage) / 100).toFixed(2)}</span> 
+             <span>$${finalPrice}</span> 
             </p>`;
     } else {
       str = `<p class="card-text">$${item.price}</p>`;
     }
 
-    let image_item = products.findIndex(x=>item.id==x.id)
+    totalPrice += parseFloat(finalPrice);
+
+    let image_item = products.findIndex(x => item.id == x.id);
 
     $(".cart_data").append(`
       <div class="col-lg-3 col-md-6 col-sm-12">
@@ -156,7 +163,16 @@ const getCartData = () => {
       </div>
     `);
   });
+
+  $("#totalPrice").text(totalPrice.toFixed(2)); 
+
+  $("#purchaseNow").off("click").on("click", () => {
+    alert(`Thank you for your purchase! Total: $${totalPrice.toFixed(2)}`);
+    cart = [];  
+    getCartData();  
+  });
 };
+
 
 const cart_list_show=()=>{
   getCartData()
