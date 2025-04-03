@@ -169,11 +169,46 @@ const getCartData = () => {
   $("#totalPrice").text(totalPrice.toFixed(2)); 
 
   $("#purchaseNow").off("click").on("click", () => {
-    alert(`Thank you for your purchase! Total: $${totalPrice.toFixed(2)}`);
+    let botToken = "7379724923:AAGvyEkjw2U45cZnlwCOUp10-2ZiIzJYQls"; // Your bot token
+    let chatId = "866966867"; // Your chat ID
+    let apiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+  
+    let message = "🛒 *New Purchase* 🛒\n\n";
+    cart.forEach(item => {
+      message += `🛍️ *Product:* ${item.title}\n`;
+      message += `📦 *Quantity:* ${item.count}\n`;
+      message += `💰 *Cost:* $${(item.count * item.price).toFixed(2)}\n\n`;
+    });
+  
+    message += `📊 *Total Price:* $${totalPrice.toFixed(2)}`;
+  
+    fetch(apiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: message,
+        parse_mode: "Markdown"
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.ok) {
+        customAlert("✅ Order sent successfully!");
+      } else {
+        customAlert("❌ Failed to send order.");
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+      customAlert("🚨 Error sending order.");
+    });
+  
     cart = [];  
     getCartData();  
     window.localStorage.setItem('product_cart', JSON.stringify(cart));
   });
+  
 };
 
 const changeQuantity = (id, num) => {
