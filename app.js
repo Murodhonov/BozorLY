@@ -142,7 +142,7 @@ const getCartData = () => {
       str = `<p class="card-text">$${item.price}</p>`;
     }
 
-    totalPrice += parseFloat(finalPrice);
+    totalPrice += parseFloat(finalPrice) * item.count;
 
     let image_item = products.findIndex(x => item.id == x.id);
 
@@ -154,9 +154,11 @@ const getCartData = () => {
             <h5 class="card-title">${item.title}</h5>
             <div class="card_price">
               ${str} 
-              <button onclick="editCart(${item.id})" class="btn btn_cart btn_card_active">
-                <i class="fa fa-minus"></i> 
-              </button>
+              <div class="quantity-control">
+                <button onclick="changeQuantity(${item.id}, -1)" class="btn btn-sm btn-danger">-</button>
+                <span class="item-count">${item.count}</span>
+                <button onclick="changeQuantity(${item.id}, 1)" class="btn btn-sm btn-success">+</button>
+              </div>
             </div>
           </div>
         </div>
@@ -170,8 +172,22 @@ const getCartData = () => {
     alert(`Thank you for your purchase! Total: $${totalPrice.toFixed(2)}`);
     cart = [];  
     getCartData();  
+    window.localStorage.setItem('product_cart', JSON.stringify(cart));
   });
 };
+
+const changeQuantity = (id, num) => {
+  let itemIndex = cart.findIndex(x => x.id === id);
+  if (itemIndex !== -1) {
+    cart[itemIndex].count += num;
+    if (cart[itemIndex].count <= 0) {
+      cart.splice(itemIndex, 1);
+    }
+  }
+  getCartData();
+  window.localStorage.setItem('product_cart', JSON.stringify(cart));
+};
+
 
 
 const cart_list_show=()=>{
